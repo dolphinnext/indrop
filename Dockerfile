@@ -28,11 +28,6 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
-COPY environment.yml /
-RUN conda update -n base -c defaults conda
-RUN conda env create -f /environment.yml && conda clean -a
-ENV PATH /opt/conda/envs/dolphinnext/bin:$PATH
-
 RUN export GITUSER=UMMS-Biocore && git clone https://github.com/${GITUSER}/dolphin-bin /usr/local/bin/dolphin-bin
 RUN cd /tmp && wget https://ccb.jhu.edu/software/tophat/downloads/tophat-2.0.14.Linux_x86_64.tar.gz && \
     tar -xvzf tophat-2.0.14.Linux_x86_64.tar.gz && \
@@ -97,6 +92,10 @@ RUN R --slave -e "install.packages(c('RColorBrewer', 'Cairo'), dependencies = TR
 RUN Xvfb :0 -ac -screen 0 1960x2000x24 &
 
 
+COPY environment.yml /
+RUN conda update -n base -c defaults conda
+RUN conda env create -f /environment.yml && conda clean -a
+ENV PATH /opt/conda/envs/dolphinnext/bin:$PATH
 
 
 
