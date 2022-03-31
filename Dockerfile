@@ -77,7 +77,6 @@ RUN NPROCS=`awk '/^processor/ {s+=1}; END{print s}' /proc/cpuinfo` && \
 
 
 RUN apt-get install -y bioperl
-<<<<<<< HEAD
 RUN apt-get update 
   
     
@@ -90,16 +89,6 @@ RUN apt-get update
     
     #X11 display fix
 RUN Xvfb :0 -ac -screen 0 1960x2000x24 &
-=======
-RUN apt-get update
-
-
-RUN R --slave -e "source('https://bioconductor.org/biocLite.R'); biocLite()"
-RUN R --slave -e "install.packages(c('devtools', 'gplots', 'R.utils'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
-RUN R --slave -e "BiocManager::install(c('multtest'))"
-RUN R --slave -e "install.packages(c('Seurat', 'rmarkdown'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
-RUN R --slave -e "install.packages(c('RColorBrewer', 'Cairo'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
->>>>>>> ed3832434171772ed1db7e60700ea991043c5009
 
 
 #X11 display fix
