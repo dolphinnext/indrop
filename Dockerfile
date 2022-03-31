@@ -12,10 +12,9 @@ RUN apt-get -y install unzip libsqlite3-dev libbz2-dev libssl-dev python python-
 
 RUN apt-get -y upgrade
 RUN apt-get -y autoremove
-RUN pip install --upgrade pip==9.0.3 && pip install pysam==0.8.4 && pip install numpy scipy biopython==1.76
-RUN pip install --upgrade pip && pip install multiqc==1.8
+#RUN pip install --upgrade pip==9.0.3 && pip install pysam==0.8.4 
+#RUN pip install numpy==1.16.4 scipy==1.2.2 biopython==1.76
 RUN pip install -U boto
-RUN pip install RSeQC
 #RUN pip install umi_tools==0.5.5
 
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh && \
@@ -92,8 +91,8 @@ RUN R --slave -e "install.packages(c('RColorBrewer', 'Cairo'), dependencies = TR
 RUN Xvfb :0 -ac -screen 0 1960x2000x24 &
 
 
-COPY environment.yml /
 RUN conda update -n base -c defaults conda
+COPY environment.yml /
 RUN conda env create -f /environment.yml && conda clean -a
 ENV PATH /opt/conda/envs/dolphinnext/bin:$PATH
 
