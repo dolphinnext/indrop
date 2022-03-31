@@ -12,7 +12,7 @@ RUN apt-get -y install unzip libsqlite3-dev libbz2-dev libssl-dev python python-
 
 RUN apt-get -y upgrade
 RUN apt-get -y autoremove
-#RUN pip install --upgrade pip==9.0.3 && pip install pysam==0.8.4 
+#RUN pip install --upgrade pip==9.0.3 && pip install pysam==0.8.4
 #RUN pip install numpy==1.16.4 scipy==1.2.2 biopython==1.76
 RUN pip install -U boto
 #RUN pip install umi_tools==0.5.5
@@ -75,27 +75,24 @@ RUN NPROCS=`awk '/^processor/ {s+=1}; END{print s}' /proc/cpuinfo` && \
     tar xvf R-3.5.1.tar.gz && cd /tmp/R-3.5.1 && ./configure --enable-memory-profiling  --with-readline  --with-blas --with-tcltk  --with-recommended-packages --with-libpng --with-libtiff --with-jpeglib --enable-R-static-lib --with-blas --with-lapack --enable-R-shlib=yes && \
     make -j${NPROCS} && make install
 
-    
+
 RUN apt-get install -y bioperl
-RUN apt-get update 
-  
-    
+RUN apt-get update
+
+
 RUN R --slave -e "source('https://bioconductor.org/biocLite.R'); biocLite()"
 RUN R --slave -e "install.packages(c('devtools', 'gplots', 'R.utils'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
 RUN R --slave -e "BiocManager::install(c('multtest'))"
 RUN R --slave -e "install.packages(c('Seurat', 'rmarkdown'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
 RUN R --slave -e "install.packages(c('RColorBrewer', 'Cairo'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
-    
-    
-    #X11 display fix
-RUN Xvfb :0 -ac -screen 0 1960x2000x24 &
 
+
+#X11 display fix
+RUN Xvfb :0 -ac -screen 0 1960x2000x24 &
 
 RUN conda update -n base -c defaults conda
 COPY environment.yml /
 RUN conda env create -f /environment.yml && conda clean -a
 ENV PATH /opt/conda/envs/dolphinnext/bin:$PATH
-
-
 
 RUN echo "DONE!"
