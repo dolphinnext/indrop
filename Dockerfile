@@ -80,11 +80,11 @@ RUN apt-get install -y bioperl
 RUN apt-get update 
   
     
-RUN R --slave -e "source('https://bioconductor.org/biocLite.R'); biocLite()"
-RUN R --slave -e "install.packages(c('devtools', 'gplots', 'R.utils'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
-RUN R --slave -e "BiocManager::install(c('multtest'))"
-RUN R --slave -e "install.packages(c('Seurat', 'rmarkdown'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
-RUN R --slave -e "install.packages(c('RColorBrewer', 'Cairo'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
+#RUN R --slave -e "source('https://bioconductor.org/biocLite.R'); biocLite()"
+#RUN R --slave -e "install.packages(c('devtools', 'gplots', 'R.utils'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
+#RUN R --slave -e "BiocManager::install(c('multtest'))"
+#RUN R --slave -e "install.packages(c('Seurat', 'rmarkdown'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
+#RUN R --slave -e "install.packages(c('RColorBrewer', 'Cairo'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
     
     
     #X11 display fix
