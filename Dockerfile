@@ -2,20 +2,17 @@ FROM ubuntu:16.04
 MAINTAINER Onur Yukselen <onur.yukselen@umassmed.edu>
 
 ENV PATH="/bin:/sbin:${PATH}"
-RUN echo start
+RUN echo "start"
 RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get -y dist-upgrade
-RUN apt-get -y install unzip libsqlite3-dev libbz2-dev libssl-dev python python-dev  liblzma-dev \
+RUN apt-get -y  --allow-unauthenticated install unzip libsqlite3-dev libbz2-dev libssl-dev python python-dev  liblzma-dev \
     python-pip git libxml2-dev software-properties-common wget tree vim sed make libncurses5-dev libncursesw5-dev\
     subversion g++ gcc gfortran libcurl4-openssl-dev curl zlib1g-dev build-essential libffi-dev  python-lzo libxml-libxml-perl
 
 RUN apt-get -y upgrade
 RUN apt-get -y autoremove
-#RUN pip install --upgrade pip==9.0.3 && pip install pysam==0.8.4
-#RUN pip install numpy==1.16.4 scipy==1.2.2 biopython==1.76
 RUN pip install -U boto
-#RUN pip install umi_tools==0.5.5
 
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
@@ -80,20 +77,6 @@ RUN apt-get install -y bioperl
 RUN apt-get update 
   
     
-#RUN R --slave -e "source('https://bioconductor.org/biocLite.R'); biocLite()"
-#RUN R --slave -e "install.packages(c('devtools', 'gplots', 'R.utils'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
-#RUN R --slave -e "BiocManager::install(c('multtest'))"
-#RUN R --slave -e "install.packages(c('Seurat', 'rmarkdown'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
-#RUN R --slave -e "install.packages(c('RColorBrewer', 'Cairo'), dependencies = TRUE, repos='https://cloud.r-project.org', Ncpus=${NPROCS})"
-    
-    
-    #X11 display fix
-RUN Xvfb :0 -ac -screen 0 1960x2000x24 &
-
-
-#X11 display fix
-RUN Xvfb :0 -ac -screen 0 1960x2000x24 &
-
 RUN conda update -n base -c defaults conda
 COPY environment.yml /
 RUN conda env create -f /environment.yml && conda clean -a
