@@ -35,22 +35,22 @@ RUN cd /tmp && wget https://ccb.jhu.edu/software/tophat/downloads/tophat-2.0.14.
 RUN add-apt-repository universe
 RUN apt-get update && apt-get -y install zip unzip zlibc libc6 libboost-all-dev cmake
 
-RUN export TMP=/tmp/singularity/programs && \
-    export SOURCE=${TMP}/bcl2fastq && \
-    export BUILD=${TMP}/bcl2fastq2-v2.17.1.14-build && \
-    export INSTALL_DIR=/usr/bin/bcl2fastq2-v2.17.1.14 && \
-    git clone https://github.com/onuryukselen/singularity /tmp/singularity && \
-    cd ${TMP} && \
-    wget ftp://webdata2:webdata2@ussd-ftp.illumina.com/downloads/Software/bcl2fastq/bcl2fastq2-v2.17.1.14.tar.zip && \
-    unzip bcl2fastq2-v2.17.1.14.tar.zip && \
-    tar -xvzf bcl2fastq2-v2.17.1.14.tar.gz && \
-    mkdir ${BUILD} && \
-    cd ${BUILD} && \
-    sed -i 's@HINTS ENV C_INCLUDE_PATH ENV CPATH ENV CPLUS_INCLUDE_PATH@HINTS ENV C_INCLUDE_PATH ENV CPATH ENV CPLUS_INCLUDE_PATH /usr/include/x86_64-linux-gnu/@g' ${SOURCE}/src/cmake/macros.cmake && \
-    sed -i 's@boost::property_tree::xml_writer_make_settings@boost::property_tree::xml_writer_make_settings<ptree::key_type>@g' ${SOURCE}/src/cxx/lib/io/Xml.cpp && \
-    ${SOURCE}/src/configure --prefix=${INSTALL_DIR} && \
-    make && \
-    make install
+#RUN export TMP=/tmp/singularity/programs && \
+#    export SOURCE=${TMP}/bcl2fastq && \
+#    export BUILD=${TMP}/bcl2fastq2-v2.17.1.14-build && \
+#    export INSTALL_DIR=/usr/bin/bcl2fastq2-v2.17.1.14 && \
+#    git clone https://github.com/onuryukselen/singularity /tmp/singularity && \
+#    cd ${TMP} && \
+#    wget ftp://webdata2:webdata2@ussd-ftp.illumina.com/downloads/Software/bcl2fastq/bcl2fastq2-v2.17.1.14.tar.zip && \
+#    unzip bcl2fastq2-v2.17.1.14.tar.zip && \
+#    tar -xvzf bcl2fastq2-v2.17.1.14.tar.gz && \
+#    mkdir ${BUILD} && \
+#    cd ${BUILD} && \
+#    sed -i 's@HINTS ENV C_INCLUDE_PATH ENV CPATH ENV CPLUS_INCLUDE_PATH@HINTS ENV C_INCLUDE_PATH ENV CPATH ENV CPLUS_INCLUDE_PATH /usr/include/x86_64-linux-gnu/@g' ${SOURCE}/src/cmake/macros.cmake && \
+#    sed -i 's@boost::property_tree::xml_writer_make_settings@boost::property_tree::xml_writer_make_settings<ptree::key_type>@g' ${SOURCE}/src/cxx/lib/io/Xml.cpp && \
+#    ${SOURCE}/src/configure --prefix=${INSTALL_DIR} && \
+#    make && \
+#    make install
 
 ENV PATH /bin:/sbin:/usr/local/bin/dolphin-bin:/usr/bin/bcl2fastq2-v2.17.1.14/bin:/usr/local/bin/dolphin-bin/tophat-2.0.14.Linux_x86_64:/usr/local/bin/dolphin-bin/kraken:/usr/local/bin/dolphin-bin/samtools-1.2:/usr/bin/subread-1.6.4-Linux-x86_64/bin:$PATH
 
@@ -66,11 +66,11 @@ RUN apt-get install -y libblas3 libblas-dev liblapack-dev liblapack3 ghostscript
     libtiff5 liblzma5 zlib1g
 RUN aptitude install -y xorg-dev libreadline-dev libcurl4-openssl-dev
 
-RUN NPROCS=`awk '/^processor/ {s+=1}; END{print s}' /proc/cpuinfo` && \
-    cd /tmp && wget http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu52_52.1-3ubuntu0.8_amd64.deb && \
-    dpkg -i libicu52_52.1-3ubuntu0.8_amd64.deb && wget https://cran.rstudio.com/src/base/R-3/R-3.5.1.tar.gz && \
-    tar xvf R-3.5.1.tar.gz && cd /tmp/R-3.5.1 && ./configure --enable-memory-profiling  --with-readline  --with-blas --with-tcltk  --with-recommended-packages --with-libpng --with-libtiff --with-jpeglib --enable-R-static-lib --with-blas --with-lapack --enable-R-shlib=yes && \
-    make -j${NPROCS} && make install
+#RUN NPROCS=`awk '/^processor/ {s+=1}; END{print s}' /proc/cpuinfo` && \
+#    cd /tmp && wget http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu52_52.1-3ubuntu0.8_amd64.deb && \
+#    dpkg -i libicu52_52.1-3ubuntu0.8_amd64.deb && wget https://cran.rstudio.com/src/base/R-3/R-3.5.1.tar.gz && \
+#    tar xvf R-3.5.1.tar.gz && cd /tmp/R-3.5.1 && ./configure --enable-memory-profiling  --with-readline  --with-blas --with-tcltk  --with-recommended-packages --with-libpng --with-libtiff --with-jpeglib --enable-R-static-lib --with-blas --with-lapack --enable-R-shlib=yes && \
+#    make -j${NPROCS} && make install
 
 
 RUN apt-get install -y bioperl
@@ -79,7 +79,12 @@ RUN apt-get update
     
 RUN conda update -n base -c defaults conda
 COPY environment.yml /
-RUN conda env create -f /environment.yml && conda clean -a
+RUN . /opt/conda/etc/profile.d/conda.sh && \ 
+    conda activate base && \
+    conda install -c conda-forge mamba && \
+    mamba env create -f /environment.yml && \
+    mamba clean -a
+#RUN conda env create -f /environment.yml && conda clean -a
 ENV PATH /opt/conda/envs/dolphinnext/bin:$PATH
 
 RUN echo "DONE!"
