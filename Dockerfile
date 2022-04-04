@@ -46,7 +46,7 @@ RUN apt-get update
 #    texinfo tk8.6-dev texlive-extra-utils texlive-fonts-recommended texlive-fonts-extra texlive-latex-recommended x11proto-core-dev \
 #    zlib1g-dev  fonts-texgyre libblas-dev libbz2-1.0  libopenblas-dev libpangocairo-1.0-0 libpcre3 libpng16-16 \
 #    libtiff5 liblzma5 zlib1g
-3RUN aptitude install -y xorg-dev libreadline-dev libcurl4-openssl-dev
+#RUN aptitude install -y xorg-dev libreadline-dev libcurl4-openssl-dev
 
 
 #RUN apt-get install -y bioperl
