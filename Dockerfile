@@ -38,14 +38,14 @@ RUN apt-get update && apt-get -y install zip unzip zlibc libc6 libboost-all-dev 
 ENV PATH /bin:/sbin:/usr/local/bin/dolphin-bin:/usr/bin/bcl2fastq2-v2.17.1.14/bin:/usr/local/bin/dolphin-bin/tophat-2.0.14.Linux_x86_64:/usr/local/bin/dolphin-bin/kraken:/usr/local/bin/dolphin-bin/samtools-1.2:/usr/bin/subread-1.6.4-Linux-x86_64/bin:$PATH
 
 RUN apt-get update
-#RUN apt-get install -y libblas3 libblas-dev liblapack-dev liblapack3 ghostscript \
-#    libgmp10 libgmp-dev fort77 aptitude libpcre3-dev liblzma-dev libmariadb-client-lgpl-dev pandoc libhdf5-dev \
-#    libx11-dev libxt-dev qpdf  xvfb xauth xfonts-base xorg libx11-dev libglu1-mesa-dev libfreetype6-dev \
-#    libx11-6 libxss1 libxt6 libxext6 libsm6 libice6 xdg-utils libbz2-dev libcairo2-dev libcurl4-openssl-dev libpango1.0-dev \
-#    libjpeg-dev libicu-dev  libpcre3-dev libpng-dev libreadline-dev libtiff5-dev liblzma-dev  libx11-dev libxt-dev tcl8.6-dev \
-#    texinfo tk8.6-dev texlive-extra-utils texlive-fonts-recommended texlive-fonts-extra texlive-latex-recommended x11proto-core-dev \
-#    zlib1g-dev  fonts-texgyre libblas-dev libbz2-1.0  libopenblas-dev libpangocairo-1.0-0 libpcre3 libpng16-16 \
-#    libtiff5 liblzma5 zlib1g
+RUN apt-get install -y libblas3 libblas-dev liblapack-dev liblapack3 ghostscript \
+    libgmp10 libgmp-dev fort77 aptitude libpcre3-dev liblzma-dev libmariadb-client-lgpl-dev pandoc libhdf5-dev \
+    libx11-dev libxt-dev qpdf  xvfb xauth xfonts-base xorg libx11-dev libglu1-mesa-dev libfreetype6-dev \
+    libx11-6 libxss1 libxt6 libxext6 libsm6 libice6 xdg-utils libbz2-dev libcairo2-dev libcurl4-openssl-dev libpango1.0-dev \
+    libjpeg-dev libicu-dev  libpcre3-dev libpng-dev libreadline-dev libtiff5-dev liblzma-dev  libx11-dev libxt-dev tcl8.6-dev \
+    texinfo tk8.6-dev texlive-extra-utils texlive-fonts-recommended texlive-fonts-extra texlive-latex-recommended x11proto-core-dev \
+    zlib1g-dev  fonts-texgyre libblas-dev libbz2-1.0  libopenblas-dev libpangocairo-1.0-0 libpcre3 libpng16-16 \
+    libtiff5 liblzma5 zlib1g
 #RUN aptitude install -y xorg-dev libreadline-dev libcurl4-openssl-dev
 
 
