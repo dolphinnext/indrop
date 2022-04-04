@@ -10,25 +10,25 @@ RUN apt-get -y  --allow-unauthenticated install unzip libsqlite3-dev libbz2-dev 
     python-pip git libxml2-dev software-properties-common wget tree vim sed make libncurses5-dev libncursesw5-dev\
     subversion g++ gcc gfortran libcurl4-openssl-dev curl zlib1g-dev build-essential libffi-dev  python-lzo libxml-libxml-perl
 
-#RUN apt-get -y upgrade
-#RUN apt-get -y autoremove
-#RUN pip install -U boto
+RUN apt-get -y upgrade
+RUN apt-get -y autoremove
+RUN pip install -U boto
 
-#RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh && \
-#    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
-#    rm ~/miniconda.sh && \
-#    /opt/conda/bin/conda clean -tipsy && \
-#    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-#    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-#    echo "conda activate base" >> ~/.bashrc
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
+    rm ~/miniconda.sh && \
+    /opt/conda/bin/conda clean -tipsy && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
-#RUN export GITUSER=UMMS-Biocore && git clone https://github.com/${GITUSER}/dolphin-bin /usr/local/bin/dolphin-bin
-#RUN cd /tmp && wget https://ccb.jhu.edu/software/tophat/downloads/tophat-2.0.14.Linux_x86_64.tar.gz && \
-#    tar -xvzf tophat-2.0.14.Linux_x86_64.tar.gz && \
-#    rm -rf /usr/local/bin/dolphin-bin/tophat2_2.0.12 && \
-#    mv tophat-2.0.14.Linux_x86_64/ /usr/local/bin/dolphin-bin/.
+RUN export GITUSER=UMMS-Biocore && git clone https://github.com/${GITUSER}/dolphin-bin /usr/local/bin/dolphin-bin
+RUN cd /tmp && wget https://ccb.jhu.edu/software/tophat/downloads/tophat-2.0.14.Linux_x86_64.tar.gz && \
+    tar -xvzf tophat-2.0.14.Linux_x86_64.tar.gz && \
+    rm -rf /usr/local/bin/dolphin-bin/tophat2_2.0.12 && \
+    mv tophat-2.0.14.Linux_x86_64/ /usr/local/bin/dolphin-bin/.
 
 # BCL2FASTQ v2.17.1.14
 
