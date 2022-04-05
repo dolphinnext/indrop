@@ -19,10 +19,13 @@ wget https://galaxyweb.umassmed.edu/pub/genome_data/mouse/mm10_gencode_m25/ -P $
 wget https://galaxyweb.umassmed.edu/pub/genome_data/rat/rn6/ -P ${dnextdata}/genome_data/rat/rn6/ -l inf -nc -nH --cut-dirs=4 -r --no-parent -R "index.html*" 
 wget https://galaxyweb.umassmed.edu/pub/genome_data/d_melanogaster/dm3/ -P ${dnextdata}/genome_data/d_melanogaster/dm3/ -l inf -nc -nH --cut-dirs=4 -r --no-parent -R "index.html*" 
 
-nextflow main.nf \
+git -C ${dnextdata} clone https://github.com/dolphinnext/indrop.git
+export NXF_VER=21.10.5
+
+nextflow ${dnextdata}/indrop/main.nf  -profile singularity \
 --DOWNDIR ${dnextdata} \
---reads '*_R{1,2}.fastq.gz' \ 
---mate 'pair' \
+--reads '*_{R1,R2,R3}.fastq.gz' \
+--mate 'triple' \
 --genome_build 'human_hg38_gencode_v34' \
 --run_Single_Cell_Module = 'yes' \
 --run_Tophat = 'no' \
@@ -31,9 +34,6 @@ nextflow main.nf \
 --cutoff_for_reads_per_cell = '10' \
 --run_Split_Fastq = 'no' \
 --indrop_version = 'NextSeq550' \
---cutoff_reads_for_valid_cell "100" \
---mate_split "single" \
---determined_fastq "./*_{R1,R2,R3}_001.fastq.gz" \
---cellBarcodeFile "./scripts/gel_barcode1_list.txt"
+--cutoff_reads_for_valid_cell "100"
 
 
