@@ -61,5 +61,7 @@ RUN . /opt/conda/etc/profile.d/conda.sh && \
     mamba env create -f /environment.yml && \
     mamba clean -a
 ENV PATH /opt/conda/envs/dolphinnext/bin:$PATH
+RUN ln -s /opt/conda/envs/dolphinnext/bin/Rscript /usr/local/bin/Rscript
+RUN ln -s /opt/conda/envs/dolphinnext/bin/R /usr/local/bin/R
 
 RUN echo "DONE!"
