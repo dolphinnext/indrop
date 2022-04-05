@@ -53,14 +53,13 @@ RUN apt-get install -y bioperl
 RUN apt-get update 
   
     
-#RUN conda update -n base -c defaults conda
-#COPY environment.yml /
-#RUN . /opt/conda/etc/profile.d/conda.sh && \ 
-#    conda activate base && \
-#    conda install -c conda-forge mamba && \
-#    mamba env create -f /environment.yml && \
-#    mamba clean -a
-#RUN conda env create -f /environment.yml && conda clean -a
+RUN conda update -n base -c defaults conda
+COPY environment.yml /
+RUN . /opt/conda/etc/profile.d/conda.sh && \ 
+    conda activate base && \
+    conda install -c conda-forge mamba && \
+    mamba env create -f /environment.yml && \
+    mamba clean -a
 ENV PATH /opt/conda/envs/dolphinnext/bin:$PATH
 
 RUN echo "DONE!"
