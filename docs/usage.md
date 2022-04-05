@@ -33,7 +33,7 @@ wget https://galaxyweb.umassmed.edu/pub/genome_data/mouse/mm10_gencode_m25/ -P $
 wget https://galaxyweb.umassmed.edu/pub/genome_data/rat/rn6/ -P ${dnextdata}/genome_data/rat/rn6/ -l inf -nc -nH --cut-dirs=4 -r --no-parent -R "index.html*" 
 wget https://galaxyweb.umassmed.edu/pub/genome_data/d_melanogaster/dm3/ -P ${dnextdata}/genome_data/d_melanogaster/dm3/ -l inf -nc -nH --cut-dirs=4 -r --no-parent -R "index.html*" 
 
-nextflow run dolphinnext/rnaseq -profile docker --DOWNDIR ${dnextdata}/genome_data --reads '*_R{1,2}.fastq.gz' --mate 'pair' --genome_build mouse_mm10 
+nextflow run dolphinnext/indrop -profile docker --DOWNDIR ${dnextdata}/genome_data --reads '*_R{1,2}.fastq.gz' --mate 'pair' --genome_build mouse_mm10 
 ```
 
 
@@ -63,7 +63,7 @@ If `-profile` is not specified at all the pipeline will be run locally and expec
 
 * `docker`
   * A generic configuration profile to be used with [Docker](http://docker.com/)
-  * Pulls software from Dockerhub: [`dolphinnext/rnaseq`](http://hub.docker.com/r/dolphinnext/indrop/)
+  * Pulls software from Dockerhub: [`dolphinnext/indrop`](http://hub.docker.com/r/dolphinnext/indrop/)
 * `singularity`
   * A generic configuration profile to be used with [Singularity](http://singularity.lbl.gov/)
   * Pulls software from DockerHub

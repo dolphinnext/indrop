@@ -1,6 +1,7 @@
 $HOSTNAME = ""
 params.outdir = 'results'  
 
+$HOSTNAME = "default"
 //* params.genome_build =  ""  //* @dropdown @options:"human_hg19, human_hg38_gencode_v28, human_hg38_gencode_v34, mouse_mm10, mouse_mm10_gencode_m25, rat_rn6_refseq, drosophila_melanogaster_dm3, custom"
 //* params.indrop_version =  "NextSeq550"  //* @dropdown @options:"NextSeq550, NextSeq2000"
 //* params.run_HISAT2 =  "yes"  //* @dropdown @options:"yes","no" @show_settings:"Map_HISAT2"
