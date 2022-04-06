@@ -14,6 +14,7 @@ _build = ""
 _share = ""
 _trans2gene = ""
 _shareGen = ""
+_extractValidReads = ""
 //* autofill
 if (params.indrop_version == "NextSeq2000"){
     _extractValidReads = "extractValidReads_next2000.py"
