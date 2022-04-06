@@ -39,7 +39,7 @@ First, install docker on your system: [Docker Installation Instructions](https:/
 Then, running the pipeline with the option `-profile docker` tells Nextflow to enable Docker for this run. An image containing all of the software requirements will be automatically fetched and used from dockerhub ([https://hub.docker.com/r/dolphinnext/indrop](https://hub.docker.com/r/dolphinnext/indrop)).
 
 ```
-nextflow run dolphinnext/indrop -profile docker --DOWNDIR /path/to/save/genome_data --reads '*_R{1,2}.fastq.gz' --genome_build mouse_mm10
+nextflow main.nf -profile docker --DOWNDIR /path/to/save/genome_data --reads '*_R{1,2}.fastq.gz' --genome_build mouse_mm10
 ```
 
 ### Singularity
@@ -47,5 +47,5 @@ If you're not able to use Docker then [Singularity](http://singularity.lbl.gov/)
 The process is very similar: running the pipeline with the option `-profile singularity` tells Nextflow to enable singularity for this run. An docker image will be automatically converted into singularity image and used in the pipeline.
 
 ```
-nextflow run dolphinnext/indrop -profile singularity --DOWNDIR /path/to/save/genome_data --reads '*_R{1,2}.fastq.gz' --genome_build mouse_mm10
+nextflow main.nf -profile singularity --DOWNDIR /path/to/save/genome_data --reads '*_R{1,2}.fastq.gz' --genome_build mouse_mm10
 ```
