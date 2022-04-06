@@ -13,7 +13,7 @@ NXF_OPTS='-Xms1g -Xmx4g'
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run dolphinnext/indrop -profile docker --DOWNDIR /path/to/save/genome_data --reads '*_R{1,2}.fastq.gz' --mate 'pair' --genome_build mouse_mm10
+nextflow main.nf -profile docker --DOWNDIR /path/to/save/genome_data --reads '*_R{1,2}.fastq.gz' --mate 'pair' --genome_build mouse_mm10
 ```
 
 If you're running for the first time, you need to download genome_data as follows:
@@ -33,7 +33,7 @@ wget https://galaxyweb.umassmed.edu/pub/genome_data/mouse/mm10_gencode_m25/ -P $
 wget https://galaxyweb.umassmed.edu/pub/genome_data/rat/rn6/ -P ${dnextdata}/genome_data/rat/rn6/ -l inf -nc -nH --cut-dirs=4 -r --no-parent -R "index.html*" 
 wget https://galaxyweb.umassmed.edu/pub/genome_data/d_melanogaster/dm3/ -P ${dnextdata}/genome_data/d_melanogaster/dm3/ -l inf -nc -nH --cut-dirs=4 -r --no-parent -R "index.html*" 
 
-nextflow run dolphinnext/indrop -profile docker --DOWNDIR ${dnextdata}/genome_data --reads '*_R{1,2}.fastq.gz' --mate 'pair' --genome_build mouse_mm10 
+nextflow main.nf -profile docker --DOWNDIR ${dnextdata}/genome_data --reads '*_R{1,2}.fastq.gz' --mate 'pair' --genome_build mouse_mm10 
 ```
 
 
