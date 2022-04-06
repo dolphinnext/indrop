@@ -36,12 +36,14 @@ RUN apt-get update && apt-get -y install zip unzip zlibc libc6 libboost-all-dev 
 ENV PATH /bin:/sbin:/usr/local/bin/dolphin-bin:/usr/bin/bcl2fastq2-v2.17.1.14/bin:/usr/local/bin/dolphin-bin/tophat-2.0.14.Linux_x86_64:/usr/local/bin/dolphin-bin/kraken:/usr/local/bin/dolphin-bin/samtools-1.2:/usr/bin/subread-1.6.4-Linux-x86_64/bin:$PATH
 
 RUN apt-get update
+
 RUN apt-get install -y bioperl
 RUN apt-get update
 
 RUN conda update -n base -c defaults conda
 COPY environment.yml /
 RUN . /opt/conda/etc/profile.d/conda.sh && \
+
     conda activate base && \
     conda install -c conda-forge mamba && \
     mamba env create -f /environment.yml && \
