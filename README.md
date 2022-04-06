@@ -23,7 +23,7 @@ S1.fastq.gz
   1. Python script (extractValidReads_V3_ps.py) is used to extract valid reads by checking cell barcode list.
   2. Reads that are belong to same sample will be merged by checking sample name (region that covers asterisk in the input pattern of determined_fastq). 
   3. Fastq files are splitted by the desired cutoff value in order to enhance the speed of alignment.
-  4. Splitted fastq files are aligned by Tophat2 and converted to bam files.
+  4. Splitted fastq files are aligned (by using Tophat2, STAR or HISAT2) and converted to bam files.
   5. Mapped reads are merged by samtools.
   6. Merged bams are sorted and indexed by samtools. 
   7. Python script (countUniqueAlignedBarcodes_fromFile.py) used to count reads aligned to a single cell for filtering purposes. 
